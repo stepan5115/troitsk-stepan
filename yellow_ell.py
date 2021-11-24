@@ -10,7 +10,7 @@ from PyQt5 import uic
 class Example(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi("ellipse_yellow.ui", self)
+        uic.loadUi("UI.ui", self)
         self.initUI()
 
     def initUI(self):
