@@ -1,16 +1,39 @@
 import sys
 
 from PyQt5.QtCore import Qt, QPoint
+import sys
+
+from PyQt5.QtCore import Qt, QPoint
 import random
-from PyQt5.QtWidgets import QWidget, QApplication, QLabel, QPushButton
+from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtGui import QPainter, QColor
-from PyQt5 import uic
+
+
+class Ui_Form(object):
+    def setupUi(self, Form):
+        print('here')
+        Form.setObjectName("Form")
+        Form.resize(500, 371)
+        self.pushButton = QtWidgets.QPushButton(Form)
+        self.pushButton.setGeometry(QtCore.QRect(200, 160, 91, 23))
+        self.pushButton.setObjectName("pushButton")
+
+        self.retranslateUi(Form)
+        QtCore.QMetaObject.connectSlotsByName(Form)
+        return self.pushButton
+
+    def retranslateUi(self, Form):
+        _translate = QtCore.QCoreApplication.translate
+        Form.setWindowTitle(_translate("Form", "Form"))
+        self.pushButton.setText(_translate("Form", "НАЖМИ МЕНЯ"))
 
 
 class Example(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi("UI.ui", self)
+        ui = Ui_Form()
+        self.pushButton = ui.setupUi(self)
         self.initUI()
 
     def initUI(self):
@@ -38,8 +61,8 @@ class Example(QWidget):
         self.moment_x = event.x()
 
     def draw_flag(self, qp):
-        qp.setBrush(QColor(255, 255, 0))
         for i in range(random.randint(5, 10)):
+            qp.setBrush(QColor(random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
             r = random.randint(50, 100)
             x = random.randint(0, self.width - 100)
             y = random.randint(0, self.height - 100)
